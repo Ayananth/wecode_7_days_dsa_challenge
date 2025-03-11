@@ -1,27 +1,24 @@
 class Solution:
     def reverseVowels(self, s: str) -> str:
-        indexes=[]
-        vowels = ['a', 'e', 'i', 'o', 'u']
+        vowels = "aeiouAEIOU"
+        s = list(s)  # Convert the string to a list for easy swapping
+        left, right = 0, len(s) - 1
 
+        while left < right:
+            # Move left pointer until it finds a vowel
+            while left < right and s[left] not in vowels:
+                left += 1
+            # Move right pointer until it finds a vowel
+            while left < right and s[right] not in vowels:
+                right -= 1
+            
+            # Swap the vowels
+            s[left], s[right] = s[right], s[left]
+            left += 1
+            right -= 1
 
-        for i in range(len(s)):
-            if s[i].lower() in vowels:
-                indexes.append(i)
-        print(f"{indexes=}")
+        return ''.join(s)
 
-
-        start = 0
-        end = len(indexes)-1
-        while(start < end):
-            s = s[:indexes[start]] + s[indexes[end]] + s[indexes[start]+1: indexes[end]] + s[indexes[start]] + s[indexes[end]+1:]
-            start += 1
-            end -= 1
-        print(f"{s=}")
-        return s
-
-
-
-
-s = "a."
+s = "IceCreAm"
 obj = Solution()
 obj.reverseVowels(s)
